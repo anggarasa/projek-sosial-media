@@ -10,20 +10,20 @@
       </li>
 
       <li>
-          <a href="#">
+          <a href="/home">
               <span class="icon">
                   <ion-icon name="home-outline"></ion-icon>
               </span>
-              <span class="title">Dashboard</span>
+              <span class="title">Beranda</span>
           </a>
       </li>
 
       <li>
-          <a href="#">
+          <a href="/cari">
               <span class="icon">
-                  <ion-icon name="people-outline"></ion-icon>
+                <ion-icon name="search-outline"></ion-icon>
               </span>
-              <span class="title">Customers</span>
+              <span class="title">Cari</span>
           </a>
       </li>
 
