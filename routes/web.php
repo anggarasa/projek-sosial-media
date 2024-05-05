@@ -1,17 +1,23 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProfileController;
+use GuzzleHttp\Psr7\Request;
 
 Route::middleware(['auth', 'verified'])->group(function () {
     // Beranda
     Route::get('/Home', function () {
-        return view('home.home');
+        return view('home.home', [
+            'title' => 'Beranda'
+        ]);
     })->name('dashboard');
 
     // Fitur Cari
     Route::get('/cari', function () {
-        return view('home.fit-cari.cari');
+        return view('home.fit-cari.cari', [
+            'title' => 'Search',
+        ]);
     })->name('cari');
 });
 

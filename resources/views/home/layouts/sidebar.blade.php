@@ -37,11 +37,11 @@
       </li>
 
       <li>
-          <a href="#">
+          <a href="/profile">
               <span class="icon">
-                  <ion-icon name="help-outline"></ion-icon>
+                <ion-icon name="person-circle-outline"></ion-icon>
               </span>
-              <span class="title">Help</span>
+              <span class="title">Profile</span>
           </a>
       </li>
 
