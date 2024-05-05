@@ -19,6 +19,13 @@ Route::middleware(['auth', 'verified'])->group(function () {
             'title' => 'Search',
         ]);
     })->name('cari');
+
+    // password update
+    Route::get('/password', function () {
+        return view('profile.edit', [
+            'title' => 'Change Password',
+        ]);
+    })->name('password');
 });
 
 Route::middleware('auth')->group(function () {
