@@ -1,91 +1,100 @@
 @extends('home.layouts.main')
 @section('home')
-<div class="bg-white w-full flex flex-col justify-center gap-5 px-3 md:px-16 lg:px-28 md:flex-row text-[#161931]">
-  <main class="w-full min-h-screen py-1 md:w-2/3 lg:w-3/4">
-      <div class="p-2 md:p-4">
-          <div class="w-full px-6 pb-8 mt-8 sm:max-w-xl sm:rounded-lg">
-              <h2 class="pl-6 text-2xl font-bold sm:text-xl">My Profile</h2>
-
-              <form id="send-verification" method="post" action="{{ route('verification.send') }}">
-                @csrf
-            </form>
+<div class="p-16">
+    <div class="p-8 mt-24">
+        <div class="grid grid-cols-1 md:grid-cols-3">
+            <div class="grid grid-cols-3 text-center order-last md:order-first mt-20 md:mt-0">
+                <div>
+                    <p class="font-bold text-gray-700 text-xl">22</p>
+                    <p class="text-gray-400">Friends</p>
+                </div>
+                <div>
+                    <p class="font-bold text-gray-700 text-xl">10</p>
+                    <p class="text-gray-400">Photos</p>
+                </div>
+                <div>
+                    <p class="font-bold text-gray-700 text-xl">89</p>
+                    <p class="text-gray-400">Comments</p>
+                </div>
+            </div>
+            <div class="relative">
+                <div class="w-48 h-48 bg-indigo-100 mx-auto rounded-full shadow-2xl absolute inset-x-0 top-0 -mt-24 flex items-center justify-center text-indigo-500">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-24 w-24" viewBox="0 0 20 20" fill="currentColor">  <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" /></svg>
+                </div>
+            </div>
+            <div class="space-x-8 flex justify-between mt-32 md:mt-0 md:justify-center">
+                <a href="/profile-edit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Edit</a>
+                <button  class="text-white py-2 px-4 uppercase rounded bg-gray-700 hover:bg-gray-800 shadow hover:shadow-lg font-medium transition transform hover:-translate-y-0.5">  Message</button>
+            </div>
+        </div>
+            <div class="mt-20 text-center border-b-2 pb-12">
+                <h1 class="text-4xl font-medium text-gray-700">{{ $user->username }}</h1>
+                <p class="font-light text-gray-600 mt-3">{{ $user->name }}</p>
+                <p class="mt-8 text-gray-500"><ion-icon name="call-outline"></ion-icon> +62 {{ $user->nohp }}</p>
+                <p class="mt-2 text-gray-500"><ion-icon name="mail-outline"></ion-icon> {{ $user->email }}</p>
+            </div>
+        </div>
+        <div class="grid grid-cols-1 gap-8 mt-8 lg:grid-cols-2">
+            <article class="overflow-hidden my-5 rounded-b-lg border-b-4 transition">
+                <div class="flex items-center px-2 mb-5 justify-between">
+                    <div class="flex items-center">
+                        <img class="w-8 h-8 rounded-full mr-4 avatar" data-tippy-content="Author Name" src="http://i.pravatar.cc/300" alt="Avatar of Author">
+                        <a class="font-bold text-gray-700 cursor-pointer dark:text-gray-200" tabindex="0" role="link">Khatab wedaa</a>
+                    </div>
+                    <p class="text-black text-xs md:text-sm">1 MIN READ</p>
+                </div>
+                <img
+                  alt=""
+                  src="https://images.unsplash.com/photo-1524758631624-e2822e304c36?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80"
+                  class="h-56 w-full object-cover"
+                />
               
-            <form method="post" action="{{ route('profile.update') }}">
-              @csrf
-              @method('patch')
-              <div class="grid max-w-2xl mx-auto mt-8">
-                  <div class="flex flex-col items-center space-y-5 sm:flex-row sm:space-y-0">
-
-                      <img class="object-cover w-40 h-40 p-1 rounded-full ring-2 ring-indigo-300 dark:ring-indigo-500"
-                          src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fGZhY2V8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60"
-                          alt="Bordered avatar">
-                          {{-- #202142 --}}
-                      <div class="flex flex-col space-y-5 sm:ml-8">
-                          <input type="file"
-                              class="py-3.5 px-2 text-base font-medium text-indigo-100 focus:outline-none bg-black rounded-lg border border-indigo-200 hover:bg-gray-900 focus:z-10 focus:ring-4 focus:ring-indigo-200 ">
-                      </div>
-                  </div>
-
-                  <div class="items-center mt-8 sm:mt-14 text-black">
-
-                      <div
-                          class="flex flex-col items-center w-full mb-2 space-x-0 space-y-2 sm:flex-row sm:space-x-4 sm:space-y-0 sm:mb-6">
-                          <div class="w-full">
-                              <label for="first_name"
-                                  class="block mb-2 text-sm font-medium text-indigo-900 dark:text-white">Name Lengkap</label>
-                              <input type="text" id="first_name"
-                                  class="bg-indigo-50 border border-black text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5 "
-                                  placeholder="Your first name" value="{{ old('name', $user->name) }}" required>
-                              <x-input-error class="mt-2" :messages="$errors->get('name')" />
-                          </div>
-
-                          <div class="w-full">
-                              <label for="last_name"
-                                  class="block mb-2 text-sm font-medium text-indigo-900 dark:text-white">Username</label>
-                              <input type="text" id="last_name"
-                                  class="bg-indigo-50 border border-black text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5 "
-                                  placeholder="Your last name" value="{{ old('username') }}" required>
-                              <x-input-error class="mt-2" :messages="$errors->get('username')" />
-                          </div>
-
-                      </div>
-
-                      <div class="mb-2 sm:mb-6">
-                          <label for="email"
-                              class="block mb-2 text-sm font-medium text-indigo-900 dark:text-white">Email</label>
-                          <input type="email" id="email"
-                              class="bg-indigo-50 border border-black text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5 "
-                              placeholder="your.email@mail.com" value="{{ old('email', $user->email) }}" required>
-                          <x-input-error class="mt-2" :messages="$errors->get('email')" />
-                      </div>
-
-                      <div class="mb-2 sm:mb-6">
-                          <label for="profession"
-                              class="block mb-2 text-sm font-medium text-indigo-900 dark:text-white">Nomber Handphone</label>
-                          <input type="text" id="profession"
-                              class="bg-indigo-50 border border-black text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5 "
-                              placeholder="+62 ">
-                          <x-input-error class="mt-2" :messages="$errors->get('nohp')" />
-                      </div>
-
-                      {{-- <div class="mb-6">
-                          <label for="message"
-                              class="block mb-2 text-sm font-medium text-indigo-900 dark:text-white">Bio</label>
-                          <textarea id="message" rows="4"
-                              class="block p-2.5 w-full text-sm text-indigo-900 bg-indigo-50 rounded-lg border border-indigo-300 focus:ring-indigo-500 focus:border-indigo-500 "
-                              placeholder="Write your bio here..."></textarea>
-                      </div> --}}
-
-                      <div class="flex justify-end">
-                          <button type="submit"
-                              class="text-white bg-black  hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-gray-600 dark:hover:bg-black dark:focus:ring-gray-800">Save</button>
-                      </div>
-
-                  </div>
-              </div>
-            </form>
-          </div>
-      </div>
-  </main>
-</div>
+                <div class="bg-white p-4 sm:p-6">
+                    <a href="#" class="text-2xl mr-3"><ion-icon name="heart-outline"></ion-icon></a>
+                    <a href="#" class="text-2xl"><ion-icon name="chatbubble-outline"></ion-icon></a>
+              
+                  <a href="#">
+                    <h3 class="mt-0.5 text-lg text-gray-900">How to position your furniture for positivity</h3>
+                  </a>
+              
+                  <p class="mt-2 line-clamp-3 text-sm/relaxed text-gray-500">
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Recusandae dolores, possimus
+                    pariatur animi temporibus nesciunt praesentium dolore sed nulla ipsum eveniet corporis quidem,
+                    mollitia itaque minus soluta, voluptates neque explicabo tempora nisi culpa eius atque
+                    dignissimos. Molestias explicabo corporis voluptatem?
+                  </p>
+                </div>
+            </article>
+            <article class="overflow-hidden my-5 rounded-b-lg border-b-4 transition">
+                <div class="flex items-center px-2 mb-5 justify-between">
+                    <div class="flex items-center">
+                        <img class="w-8 h-8 rounded-full mr-4 avatar" data-tippy-content="Author Name" src="http://i.pravatar.cc/300" alt="Avatar of Author">
+                        <a class="font-bold text-gray-700 cursor-pointer dark:text-gray-200" tabindex="0" role="link">Khatab wedaa</a>
+                    </div>
+                    <p class="text-black text-xs md:text-sm">1 MIN READ</p>
+                </div>
+                <img
+                  alt=""
+                  src="https://images.unsplash.com/photo-1524758631624-e2822e304c36?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80"
+                  class="h-56 w-full object-cover"
+                />
+              
+                <div class="bg-white p-4 sm:p-6">
+                    <a href="#" class="text-2xl mr-3"><ion-icon name="heart-outline"></ion-icon></a>
+                    <a href="#" class="text-2xl"><ion-icon name="chatbubble-outline"></ion-icon></a>
+              
+                  <a href="#">
+                    <h3 class="mt-0.5 text-lg text-gray-900">How to position your furniture for positivity</h3>
+                  </a>
+              
+                  <p class="mt-2 line-clamp-3 text-sm/relaxed text-gray-500">
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Recusandae dolores, possimus
+                    pariatur animi temporibus nesciunt praesentium dolore sed nulla ipsum eveniet corporis quidem,
+                    mollitia itaque minus soluta, voluptates neque explicabo tempora nisi culpa eius atque
+                    dignissimos. Molestias explicabo corporis voluptatem?
+                  </p>
+                </div>
+            </article>
+        </div>
+    </div>
 @endsection

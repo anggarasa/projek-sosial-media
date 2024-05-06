@@ -37,7 +37,7 @@
       </li>
 
       <li>
-          <a href="/profile">
+          <a href="/profile-user">
               <span class="icon">
                 <ion-icon name="person-circle-outline"></ion-icon>
               </span>
@@ -46,7 +46,7 @@
       </li>
 
       <li>
-          <a href="#">
+          <a href="/profile-edit">
               <span class="icon">
                   <ion-icon name="settings-outline"></ion-icon>
               </span>

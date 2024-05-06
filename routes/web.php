@@ -20,6 +20,21 @@ Route::middleware(['auth', 'verified'])->group(function () {
         ]);
     })->name('cari');
 
+    // profile
+    Route::get('/profile-user', function() {
+        return view('home.profile', [
+            'title' => 'My Profile',
+            'user' => auth()->user(),
+        ]);
+    });
+
+    // password update
+    Route::get('/password', function () {
+        return view('profile.edit', [
+            'title' => 'Change Password',
+        ]);
+    })->name('password');
+    
     // password update
     Route::get('/password', function () {
         return view('profile.edit', [
@@ -29,9 +44,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
 });
 
 Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::get('/profile-edit', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile-edit', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile-edit', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
 require __DIR__.'/auth.php';
