@@ -85,7 +85,11 @@
                   </div>
               </div>
             </form>
-          </div>
+      </div>
+      <div class="p-4 mb-10 border border-black sm:p-8 bg-white shadow sm:rounded-lg">
+        <div class="max-w-xl">
+            @include('profile.partials.delete-user-form')
+        </div>
       </div>
   </main>
 </div>

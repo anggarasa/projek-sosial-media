@@ -22,9 +22,14 @@
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-24 w-24" viewBox="0 0 20 20" fill="currentColor">  <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" /></svg>
                 </div>
             </div>
-            <div class="space-x-8 flex justify-between mt-32 md:mt-0 md:justify-center">
-                <a href="/profile-edit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Edit</a>
-                <button  class="text-white py-2 px-4 uppercase rounded bg-gray-700 hover:bg-gray-800 shadow hover:shadow-lg font-medium transition transform hover:-translate-y-0.5">  Message</button>
+            <div class="space-x-8 flex justify-between items-center mt-32 md:mt-0 md:justify-center">
+                <a href="/profile-edit" class="text-white py-2 px-4 uppercase rounded bg-green-400 hover:bg-green-600 shadow hover:shadow-lg font-medium transition transform hover:-translate-y-0.5">Edit</a>
+                <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+                  <a href="{{ route('logout') }}" onclick="event.preventDefault(); this.closest('form').submit();" class="text-white py-2 px-4 uppercase rounded bg-red-600 hover:bg-red-400 shadow hover:shadow-lg font-medium transition transform hover:-translate-y-0.5">
+                    Log out
+                  </a>
+                </form>
             </div>
         </div>
             <div class="mt-20 text-center border-b-2 pb-12">

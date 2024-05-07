@@ -46,7 +46,7 @@
       </li>
 
       <li>
-          <a href="/profile-edit">
+          <a href="/settings">
               <span class="icon">
                   <ion-icon name="settings-outline"></ion-icon>
               </span>
@@ -61,18 +61,6 @@
               </span>
               <span class="title">Password</span>
           </a>
-      </li>
-
-      <li>
-        <form method="POST" action="{{ route('logout') }}">
-            @csrf
-          <a href="{{ route('logout') }}" onclick="event.preventDefault(); this.closest('form').submit();">
-              <span class="icon">
-                  <ion-icon name="log-out-outline"></ion-icon>
-              </span>
-              <span class="title">Sign Out</span>
-          </a>
-        </form>
       </li>
   </ul>
 </div>
