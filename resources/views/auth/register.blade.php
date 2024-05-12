@@ -4,13 +4,23 @@
 
         <!-- Name -->
         <div class="col-span-6 sm:col-span-3">
-            <label for="name" class="block text-sm font-medium text-gray-700">First Name</label>
+            <label for="name" class="block text-sm font-medium text-gray-700">Nama Lengkap</label>
             <input type="text" id="name" name="name" class="mt-1 w-full rounded-md border-black bg-white text-sm text-gray-700 shadow-sm" value="{{ old('name') }}" required autofocus autocomplete="name" />
             <x-input-error :messages="$errors->get('name')" class="mt-2" />
         </div>
 
-        <!-- Email Address -->
+        {{-- Username --}}
         <div class="col-span-6 sm:col-span-3">
+          <label for="username" class="block text-sm font-medium text-gray-700">
+            Username
+          </label>
+
+          <input type="text" id="username" name="username" class="mt-1 w-full rounded-md border-black bg-white text-sm text-gray-700 shadow-sm" required/>
+          <x-input-error :messages="$errors->get('username')" class="mt-2" />
+        </div>
+
+        <!-- Email Address -->
+        <div class="col-span-6">
             <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
             <input
               type="email"

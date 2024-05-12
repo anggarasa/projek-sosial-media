@@ -41,6 +41,13 @@ Route::middleware(['auth', 'verified'])->group(function () {
             'title' => 'Change Password',
         ]);
     })->name('password');
+
+    // fitur posting 
+    Route::get('/posting', function() {
+        return view('home.posting.posting', [
+            'title' => 'Posting'
+        ]);
+    });
 });
 
 Route::middleware('auth')->group(function () {

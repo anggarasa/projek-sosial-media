@@ -3,14 +3,14 @@
       <li>
           <a href="#">
               <span class="icon">
-                  <ion-icon name="logo-apple"></ion-icon>
+                  <img src="assets/imgs/mezzi-logo-2.svg" class=" h-14 my-6 ml-6" alt="">
               </span>
-              <span class="title">Brand Name</span>
+              {{-- <span class="title">Brand Name</span> --}}
           </a>
       </li>
 
       <li>
-          <a href="/home">
+          <a href="/Home">
               <span class="icon">
                   <ion-icon name="home-outline"></ion-icon>
               </span>
@@ -25,6 +25,15 @@
               </span>
               <span class="title">Cari</span>
           </a>
+      </li>
+
+      <li>
+        <a href="#" data-modal-target="defaultModal" data-modal-toggle="defaultModal">
+            <span class="icon">
+                <ion-icon name="add-outline"></ion-icon>
+            </span>
+            <span class="title">Posting</span>
+        </a>
       </li>
 
       <li>
@@ -64,3 +73,4 @@
       </li>
   </ul>
 </div>
+@include('home.posting.posting')

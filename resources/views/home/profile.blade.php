@@ -23,7 +23,7 @@
                 </div>
             </div>
             <div class="space-x-8 flex justify-between items-center mt-32 md:mt-0 md:justify-center">
-                <a href="/profile-edit" class="text-white py-2 px-4 uppercase rounded bg-green-400 hover:bg-green-600 shadow hover:shadow-lg font-medium transition transform hover:-translate-y-0.5">Edit</a>
+                <a href="/settings" class="text-white py-2 px-4 uppercase rounded bg-green-400 hover:bg-green-600 shadow hover:shadow-lg font-medium transition transform hover:-translate-y-0.5">Edit</a>
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
                   <a href="{{ route('logout') }}" onclick="event.preventDefault(); this.closest('form').submit();" class="text-white py-2 px-4 uppercase rounded bg-red-600 hover:bg-red-400 shadow hover:shadow-lg font-medium transition transform hover:-translate-y-0.5">

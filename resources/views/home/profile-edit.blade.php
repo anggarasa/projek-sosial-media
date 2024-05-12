@@ -11,19 +11,24 @@
                 @csrf
             </form>
               
-            <form method="post" action="{{ route('profile.update') }}">
+            <form method="post" action="{{ route('profile.update') }}" enctype="multipart/form-data">
               @csrf
               @method('patch')
               <div class="grid max-w-2xl mx-auto mt-8">
                   <div class="flex flex-col items-center space-y-5 sm:flex-row sm:space-y-0">
 
-                      <img class="object-cover w-40 h-40 p-1 rounded-full ring-2 ring-indigo-300 dark:ring-indigo-500"
-                          src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fGZhY2V8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60"
-                          alt="Bordered avatar">
+                      @if ($user->profile_image)
+                        <img class="img-profile object-cover w-40 h-40 p-1 rounded-full ring-2 ring-indigo-300 dark:ring-indigo-500"
+                        src="{{ asset('storage/' . $user->profile_image) }}"
+                        alt="Bordered avatar">
+                      @else
+                        <img class="img-profile object-cover w-40 h-40 p-1 rounded-full ring-2 ring-indigo-300 dark:ring-indigo-500"
+                        src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fGZhY2V8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60"
+                        alt="Bordered avatar">
+                      @endif
                           {{-- #202142 --}}
                       <div class="flex flex-col space-y-5 sm:ml-8"> 
-                          <input type="file"
-                              class="py-3.5 px-2 text-base font-medium text-indigo-100 focus:outline-none bg-black rounded-lg border border-indigo-200 hover:bg-gray-900 focus:z-10 focus:ring-4 focus:ring-indigo-200 ">
+                          <input type="file" id="profile-gambar" name="profile_image" class="py-3.5 px-2 text-base font-medium text-indigo-100 focus:outline-none bg-black rounded-lg border border-indigo-200 hover:bg-gray-900 focus:z-10 focus:ring-4 focus:ring-indigo-200" onchange="previewProfile()">
                       </div>
                   </div>
 
@@ -32,20 +37,18 @@
                       <div
                           class="flex flex-col items-center w-full mb-2 space-x-0 space-y-2 sm:flex-row sm:space-x-4 sm:space-y-0 sm:mb-6">
                           <div class="w-full">
-                              <label for="first_name"
+                              <label for="name"
                                   class="block mb-2 text-sm font-medium text-indigo-900 dark:text-white">Name Lengkap</label>
-                              <input type="text" id="first_name"
-                                  class="bg-indigo-50 border border-black text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5 "
-                                  placeholder="Your first name" value="{{ old('name', $user->name) }}" required>
+                              <input type="text" id="name" name="name" class="bg-indigo-50 border border-black text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5 "
+                                  placeholder="Your name" value="{{ old('name', $user->name) }}" required>
                               <x-input-error class="mt-2" :messages="$errors->get('name')" />
                           </div>
 
                           <div class="w-full">
-                              <label for="last_name"
+                              <label for="username"
                                   class="block mb-2 text-sm font-medium text-indigo-900 dark:text-white">Username</label>
-                              <input type="text" id="last_name"
-                                  class="bg-indigo-50 border border-black text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5 "
-                                  placeholder="Your last name" value="{{ old('username') }}" required>
+                              <input type="text" id="username" name="username" class="bg-indigo-50 border border-black text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5 "
+                                  placeholder="Username" value="{{ old('username', $user->username) }}" required>
                               <x-input-error class="mt-2" :messages="$errors->get('username')" />
                           </div>
 
@@ -54,18 +57,16 @@
                       <div class="mb-2 sm:mb-6">
                           <label for="email"
                               class="block mb-2 text-sm font-medium text-indigo-900 dark:text-white">Email</label>
-                          <input type="email" id="email"
-                              class="bg-indigo-50 border border-black text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5 "
+                          <input type="email" id="email" name="email" class="bg-indigo-50 border border-black text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5 "
                               placeholder="your.email@mail.com" value="{{ old('email', $user->email) }}" required>
                           <x-input-error class="mt-2" :messages="$errors->get('email')" />
                       </div>
 
                       <div class="mb-2 sm:mb-6">
-                          <label for="profession"
+                          <label for="nohp"
                               class="block mb-2 text-sm font-medium text-indigo-900 dark:text-white">Nomber Handphone</label>
-                          <input type="text" id="profession"
-                              class="bg-indigo-50 border border-black text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5 "
-                              placeholder="+62 ">
+                          <input type="text" id="nohp" name="nohp" class="bg-indigo-50 border border-black text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5 "
+                              placeholder="+62 " value="{{ old('nohp', $user->nohp) }}">
                           <x-input-error class="mt-2" :messages="$errors->get('nohp')" />
                       </div>
 
@@ -93,4 +94,19 @@
       </div>
   </main>
 </div>
+
+<script>
+    function previewProfile() {
+            const image = document.querySelector('#profile-gambar');
+            const imgPreview = document.querySelector('.img-profile');
+    
+            imgPreview.style.display = 'block';
+            const oFReader = new FileReader();
+            oFReader.readAsDataURL(image.files[0]);
+    
+            oFReader.onload = function (oFREvent) {
+                imgPreview.src = oFREvent.target.result;
+            }
+        }
+</script>
 @endsection

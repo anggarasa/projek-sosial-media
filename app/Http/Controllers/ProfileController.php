@@ -7,7 +7,10 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
+use RealRashid\SweetAlert\Facades\Alert;
+
 
 class ProfileController extends Controller
 {
@@ -27,7 +30,23 @@ class ProfileController extends Controller
      */
     public function update(ProfileUpdateRequest $request): RedirectResponse
     {
-        $request->user()->fill($request->validated());
+        // $request->user()->fill($request->validated());
+        $user = $request->user();
+        $user->fill($request->validated());
+
+        // Cek jika ada gambar baru yang diupload
+        if ($request->hasFile('profile_image')) {
+            // Hapus gambar lama dari direktori 'profile-image'
+            $oldImagePath = str_replace('storage', 'profile-image', $user->profile_image);
+            if ($user->profile_image && Storage::disk('public')->exists($oldImagePath)) {
+                Storage::disk('public')->delete($oldImagePath);
+            }
+        
+            // Simpan gambar baru dan update path di database
+            $imageName = 'profile_image_' . time() . '.' . $request->profile_image->extension();
+            $path = $request->profile_image->storeAs('profile-image', $imageName, 'public');
+            $user->profile_image = $path;
+        }
 
         if ($request->user()->isDirty('email')) {
             $request->user()->email_verified_at = null;
@@ -35,7 +54,9 @@ class ProfileController extends Controller
 
         $request->user()->save();
 
-        return Redirect::route('profile')->with('status', 'profile-updated');
+        Alert::success('success', 'Anda Telah Behasil Mengubah Profile');
+
+        return redirect('/settings');
     }
 
     /**
@@ -56,6 +77,6 @@ class ProfileController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return Redirect::to('/');
+        return Redirect::to('/')->with('success', 'Akun Telah di Hapus');
     }
 }

@@ -436,6 +436,9 @@ body {
     .status.inProgress {
         white-space: nowrap;
     }
+    .recentCustomers {
+        display: none;
+    }
 }
 
 @media (max-width: 480px) {
@@ -465,5 +468,8 @@ body {
         position: fixed;
         right: 0;
         left: initial;
+    }
+    .recentCustomers {
+        display: none;
     }
 }
