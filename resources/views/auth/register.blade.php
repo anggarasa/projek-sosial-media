@@ -15,7 +15,7 @@
             Username
           </label>
 
-          <input type="text" id="username" name="username" class="mt-1 w-full rounded-md border-black bg-white text-sm text-gray-700 shadow-sm" required/>
+          <input type="text" id="username" name="username" class="mt-1 w-full rounded-md border-black bg-white text-sm text-gray-700 shadow-sm" value="{{ old('username') }}" required/>
           <x-input-error :messages="$errors->get('username')" class="mt-2" />
         </div>
 

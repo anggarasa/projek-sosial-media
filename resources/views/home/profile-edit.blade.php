@@ -25,6 +25,7 @@
                         <img class="img-profile object-cover w-40 h-40 p-1 rounded-full ring-2 ring-indigo-300 dark:ring-indigo-500"
                         src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fGZhY2V8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60"
                         alt="Bordered avatar">
+                        {{-- <svg xmlns="http://www.w3.org/2000/svg" class="img-profile object-cover w-40 h-40 p-1 rounded-full ring-2 ring-indigo-300" viewBox="0 0 20 20" fill="currentColor">  <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" /></svg> --}}
                       @endif
                           {{-- #202142 --}}
                       <div class="flex flex-col space-y-5 sm:ml-8"> 
