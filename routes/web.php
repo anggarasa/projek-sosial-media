@@ -5,11 +5,26 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use GuzzleHttp\Psr7\Request;
 
+
+Route::middleware('guest')->group(function() {
+    Route::get('/', function() {
+        return view('splash', [
+            'title' => 'intro'
+        ]);
+    });
+
+    Route::get('/Beranda', function () {
+        return view('guest.beranda', [
+            'title' => 'Beranda'
+        ]);
+    });
+});
+
 Route::middleware(['auth', 'verified'])->group(function () {
     // Beranda
     Route::get('/Home', function () {
         return view('home.home', [
-            'title' => 'Beranda'
+            'title' => 'Home'
         ]);
     })->name('dashboard');
 
